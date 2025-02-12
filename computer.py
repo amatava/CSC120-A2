@@ -22,6 +22,7 @@ class Computer:
     #What methods will you need?
         
     def update_os(self, new_os):
+        '''Assigns old operating system to the new one'''
         self.operating_system = new_os
 
 

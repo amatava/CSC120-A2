@@ -2,37 +2,30 @@ from computer import Computer
 
 class ResaleShop:
 
-    # What attributes will it need?
-    
-    # How will you set up your constructor?
-    # Remember: in python, all constructors have the same name (__init__)
     def __init__(self):
+        '''Initializes an inventoryh list to store the computers in'''
+
         self.inventory = []
-        self.new_id = 0
         
-         # You'll remove this when you fill out your constructor
-
-    # What methods will you need?
     def buy(self, computer):
-        #create a new computer instances with Computer(...)
-        computer_id = self.new_id
-        #2. call inventory.append(...) to add the
-        #new Computer instance to the inventory
-        self.inventory.append({"id": computer_id, "computer": computer})                                                       
-        #give the next computer added its own iD
-        self.new_id += 1
-        return computer_id
-    
-    def sell(self, computer_id):
-        if self.inventory[computer_id] is not None:
-            del self.inventory[computer_id]
-            print("Item", computer_id, "sold.")
-        else:
-            print("Item", computer_id, "not found. Cannot update price.")
+        '''Adds newly bought computer to the inventory list'''
 
-    def refurbish(self, computer, computer_id, new_os):
-        if self.inventory[computer_id] is not None:
-            computer = self.inventory[computer_id]["computer"] # locate the computer
+        self.inventory.append(computer.description)                                               
+        return computer.description
+    
+    def sell(self, computer_description):
+        '''Removes sold computer from the inventory'''
+        if computer_description in self.inventory:
+            self.inventory.remove(computer_description)
+            print("Item", computer_description, "sold.")
+        else:
+            print("Item", computer_description, "not found. Cannot update price.")
+
+    def refurbish(self, computer, computer_description, new_os):
+        '''Removes old computer from inventory and adds refurbished one with new price back to the inventory'''
+        if computer_description in self.inventory:
+            self.inventory.remove(computer_description) 
+            self.inventory.append(f"{computer_description}, updated to {new_os}")
             if int(computer.year_made) < 2000:
                 computer.price = 0 # too old to sell, donation only
             elif int(computer.year_made) < 2012:
@@ -45,15 +38,15 @@ class ResaleShop:
             if new_os is not None:
                 computer.operating_system = new_os # update details after installing new OS
         else:
-            print("Item", computer_id, "not found. Please select another item to refurbish.")
+            print("Item", computer_description, "not found. Please select another item to refurbish.")
 
     def print_inventory(self):
+        '''Prints every item in inventory'''
     # If the inventory is not empty
         if self.inventory:
             # For each item
             for item in self.inventory:
-                computer = item["computer"]
                 # Print its details
-                print(f'Item ID: {self.inventory.index(item)} : {item}')
+                print(item)
         else:
             print("No inventory to display.")

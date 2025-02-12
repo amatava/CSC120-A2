@@ -2,24 +2,9 @@
 from oo_resale_shop import ResaleShop
 from computer import Computer
 
-# def create_computer(description: str,
-#                     processor_type: str,
-#                     hard_drive_capacity: int,
-#                     memory: int,
-#                     operating_system: str,
-#                     year_made: int,
-#                     price: int):
-#     return {'description': description,
-#             'processor_type': processor_type,
-#             'hard_drive_capacity': hard_drive_capacity,
-#             'memory': memory,
-#             'operating_system': operating_system,
-#             'year_made': year_made,
-#             'price': price
-#     }
 
 def main():
-    
+
     resaleshop = ResaleShop() #creates instance
     # First, let's make a computer
     computer = Computer(
@@ -36,7 +21,7 @@ def main():
 
     # Add it to the resale store's inventory
     print("Buying", computer.description)
-    computer_id = resaleshop.buy(computer)
+    computer_description = resaleshop.buy(computer)
     print("Adding to inventory...")
     print("Done.\n")
 
@@ -47,9 +32,9 @@ def main():
 
     # Now, let's refurbish it
     new_OS = "MacOS Monterey"
-    print("Refurbishing Item ID:", {computer_id}, ", updating OS to", {new_OS})
+    print("Refurbishing Item:", {computer_description}, ", updating OS to", {new_OS})
     print("Updating inventory...")
-    resaleshop.refurbish(computer, computer_id, new_OS)
+    resaleshop.refurbish(computer, computer_description, new_OS)
     print("Done.\n")
 
     # Make sure it worked by checking inventory
@@ -58,8 +43,8 @@ def main():
     print("Done.\n")
     
     # Now, let's sell it!
-    print("Selling Item ID:", {computer_id})
-    resaleshop.sell(computer_id)
+    print("Selling Item:", {computer_description})
+    resaleshop.sell(computer_description)
     
     # Make sure it worked by checking inventory
     print("Checking inventory...")
